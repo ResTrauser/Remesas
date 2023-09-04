@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props" Condition="Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8DE1680A-F956-457F-A52A-75A156496B8B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Remesas</RootNamespace>
+    <AssemblyName>Remesas</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1586.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Consultas\FrmBuscarEmisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\FrmBuscarEmisor.Designer.cs">
+      <DependentUpon>FrmBuscarEmisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\FrmBuscarMoneda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\FrmBuscarMoneda.Designer.cs">
+      <DependentUpon>FrmBuscarMoneda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\FrmBuscarReceptor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\FrmBuscarReceptor.Designer.cs">
+      <DependentUpon>FrmBuscarReceptor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\FrmBuscarTransaccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultas\FrmBuscarTransaccion.Designer.cs">
+      <DependentUpon>FrmBuscarTransaccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\FrmCambioDia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\FrmCambioDia.Designer.cs">
+      <DependentUpon>FrmCambioDia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionUsuario\FrmFunciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionUsuario\FrmFunciones.Designer.cs">
+      <DependentUpon>FrmFunciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionUsuario\FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionUsuario\FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionUsuario\FrmPermisos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionUsuario\FrmPermisos.Designer.cs">
+      <DependentUpon>FrmPermisos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionUsuario\FrmUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionUsuario\FrmUsuario.Designer.cs">
+      <DependentUpon>FrmUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\FrmCobarar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\FrmCobarar.Designer.cs">
+      <DependentUpon>FrmCobarar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\FrmModificarEstado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\FrmModificarEstado.Designer.cs">
+      <DependentUpon>FrmModificarEstado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\FrmClienteEmisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\FrmClienteEmisor.Designer.cs">
+      <DependentUpon>FrmClienteEmisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\FrmClienteReceptor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\FrmClienteReceptor.Designer.cs">
+      <DependentUpon>FrmClienteReceptor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\FrmEnvio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\FrmEnvio.Designer.cs">
+      <DependentUpon>FrmEnvio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\FrmEstados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\FrmEstados.Designer.cs">
+      <DependentUpon>FrmEstados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\FrmMoneda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\FrmMoneda.Designer.cs">
+      <DependentUpon>FrmMoneda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Catalogos\FrmPais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Catalogos\FrmPais.Designer.cs">
+      <DependentUpon>FrmPais.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataEmi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataEmi.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataEnvio.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataEnvio.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataRec.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataRec.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pruebas.cs" />
+    <Compile Include="RemesasDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemesasDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="RemesasDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemesasDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="RemesasDataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemesasDataSet4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="RemesasDataSet5.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemesasDataSet5.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="RemesasDataSet6.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemesasDataSet6.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\FrmReportTransacciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\FrmReportTransacciones.Designer.cs">
+      <DependentUpon>FrmReportTransacciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\FrmRptEnvioCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\FrmRptEnvioCliente.Designer.cs">
+      <DependentUpon>FrmRptEnvioCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\FrmRptMonedas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\FrmRptMonedas.Designer.cs">
+      <DependentUpon>FrmRptMonedas.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Consultas\FrmBuscarEmisor.resx">
+      <DependentUpon>FrmBuscarEmisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\FrmBuscarMoneda.resx">
+      <DependentUpon>FrmBuscarMoneda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\FrmBuscarReceptor.resx">
+      <DependentUpon>FrmBuscarReceptor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultas\FrmBuscarTransaccion.resx">
+      <DependentUpon>FrmBuscarTransaccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\FrmCambioDia.resx">
+      <DependentUpon>FrmCambioDia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionUsuario\FrmFunciones.resx">
+      <DependentUpon>FrmFunciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionUsuario\FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionUsuario\FrmPermisos.resx">
+      <DependentUpon>FrmPermisos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionUsuario\FrmUsuario.resx">
+      <DependentUpon>FrmUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Informes\RptEnvioClienteEmisor.rdlc" />
+    <EmbeddedResource Include="Informes\RptMonedas.rdlc" />
+    <EmbeddedResource Include="Informes\RptTransacciones.rdlc" />
+    <EmbeddedResource Include="Operaciones\FrmCobarar.resx">
+      <DependentUpon>FrmCobarar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operaciones\FrmModificarEstado.resx">
+      <DependentUpon>FrmModificarEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\FrmClienteEmisor.resx">
+      <DependentUpon>FrmClienteEmisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\FrmClienteReceptor.resx">
+      <DependentUpon>FrmClienteReceptor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operaciones\FrmEnvio.resx">
+      <DependentUpon>FrmEnvio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\FrmEstados.resx">
+      <DependentUpon>FrmEstados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\FrmMoneda.resx">
+      <DependentUpon>FrmMoneda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Catalogos\FrmPais.resx">
+      <DependentUpon>FrmPais.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Reportes\FrmReportTransacciones.resx">
+      <DependentUpon>FrmReportTransacciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\FrmRptEnvioCliente.resx">
+      <DependentUpon>FrmRptEnvioCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\FrmRptMonedas.resx">
+      <DependentUpon>FrmRptMonedas.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DataEmi.xsc">
+      <DependentUpon>DataEmi.xsd</DependentUpon>
+    </None>
+    <None Include="DataEmi.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataEmi.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataEmi.xss">
+      <DependentUpon>DataEmi.xsd</DependentUpon>
+    </None>
+    <None Include="DataEnvio.xsc">
+      <DependentUpon>DataEnvio.xsd</DependentUpon>
+    </None>
+    <None Include="DataEnvio.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataEnvio.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataEnvio.xss">
+      <DependentUpon>DataEnvio.xsd</DependentUpon>
+    </None>
+    <None Include="DataRec.xsc">
+      <DependentUpon>DataRec.xsd</DependentUpon>
+    </None>
+    <None Include="DataRec.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataRec.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataRec.xss">
+      <DependentUpon>DataRec.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\RemesasDAO.DAO.ListarEnvioEmi.datasource" />
+    <None Include="Properties\DataSources\RemesasDAO.DAO.ListarEnvios.datasource" />
+    <None Include="Properties\DataSources\RemesasDAO.Plantillas.Monedas.datasource" />
+    <None Include="Properties\DataSources\RemesasEDM.ModeloApp.Envio.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="RemesasDataSet2.xsc">
+      <DependentUpon>RemesasDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="RemesasDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RemesasDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RemesasDataSet2.xss">
+      <DependentUpon>RemesasDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="RemesasDataSet3.xsc">
+      <DependentUpon>RemesasDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="RemesasDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RemesasDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RemesasDataSet3.xss">
+      <DependentUpon>RemesasDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="RemesasDataSet4.xsc">
+      <DependentUpon>RemesasDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="RemesasDataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RemesasDataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RemesasDataSet4.xss">
+      <DependentUpon>RemesasDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="RemesasDataSet5.xsc">
+      <DependentUpon>RemesasDataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="RemesasDataSet5.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RemesasDataSet5.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RemesasDataSet5.xss">
+      <DependentUpon>RemesasDataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="RemesasDataSet6.xsc">
+      <DependentUpon>RemesasDataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="RemesasDataSet6.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RemesasDataSet6.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="RemesasDataSet6.xss">
+      <DependentUpon>RemesasDataSet6.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RemesasDAO\RemesasDAO.csproj">
+      <Project>{b75f5253-d112-40a0-a611-652d03caa61c}</Project>
+      <Name>RemesasDAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RemesasEDM\RemesasEDM.csproj">
+      <Project>{a26a8adf-e2f7-42c1-ae87-3261c111f0cc}</Project>
+      <Name>RemesasEDM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props'))" />
+  </Target>
+</Project>

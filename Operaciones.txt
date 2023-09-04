@@ -1,0 +1,75 @@
+Model1Container db = new Model1Container();
+
+        public bool Agregar(ClienteEmisor emisor)
+        {
+            db.Departamento.Add(ODepartamento);
+            return (db.SaveChanges() > 0 ? true : false);
+        }
+
+        //public bool Modificar(Departamento ODepartameno)
+        //{
+        //    db.Entry(ODepartameno).State = EntityState.Modified;
+        //    return (db.SaveChanges() > 0 ? true : false);
+
+        //}
+
+        //public bool Eliminar(Departamento ODepartamento)
+        //{
+        //    db.Departamento.Remove(ODepartamento);
+        //    return db.SaveChanges() > 0 ? true : false;
+        //}
+
+        //public Departamento Buscar(string Codigo)
+        //{
+        //    Departamento ODepartamento;
+        //    ODepartamento = db.Departamento.DefaultIfEmpty(null).FirstOrDefault(D => D.CodigoDeDepartamento.Trim() == Codigo.Trim());
+        //    return (ODepartamento);
+
+        //}
+
+        public List<ListaMunicipio> ListarMunicipios(string Mun)
+
+        {
+            List<ListaMunicipio> q;
+            q = (from M in db.Municipio
+                 join D in db.Departamento on M.DepartamentoId equals D.Id
+                 where ((Mun=="" ||  M.CodigoDeMunicipio==Mun ))
+                 
+                 select new ListaMunicipio
+                 {
+                     Id = M.Id,
+                     Codigo= M.CodigoDeMunicipio,
+                     Municipio=M.DescripcionDeMunicipio,
+                     Departamento=D.DescripcionDeDepartamento
+                 }).ToList();
+            return q;
+        }
+
+
+
+
+Entry = Pasar una instancia de entidad a DbContext.Entry da como resultado un EntityEntry<TEntity> acceso que proporciona acceso a esta información para la entidad especificada.
+EntityState = Estado en el que un contexto realiza el seguimiento de una entidad.
+
+
+<<<<<<<<<<<<<<<<Solo Numeros y Letras>>>>>>>>>>>>>>>>
+if(e.KeyChar >= 32 && e.KeyChar <= 47 || e.KeyChar >= 58 && e.KeyChar <= 64 || e.KeyChar >= 91 && e.KeyChar <= 96 || e.KeyChar >= 123 && e.KeyChar <= 255)
+            {
+                MessageBox.Show("Solo numeros y letras", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Handled = true;
+                return;
+            }
+<<<<<<<<<<<<<<<<Solo Letras>>>>>>>>>>>>>>>>>>>
+if (e.KeyChar >= 32 && e.KeyChar <= 64 || e.KeyChar >= 91 && e.KeyChar <= 96 || e.KeyChar >= 123 && e.KeyChar <= 255)
+            {
+                MessageBox.Show("Solo letras", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Handled = true;
+                return;
+            }
+<<<<<<<<<<<<<<<<Solo Numeros>>>>>>>>>>>>>>>>>>>
+if (e.KeyChar >= 32 && e.KeyChar <= 47 || e.KeyChar >= 58 && e.KeyChar <= 255)
+            {
+                MessageBox.Show("Solo numeros", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Handled = true;
+                return;
+            }

@@ -1,0 +1,763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClienteEmisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoEmisor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NombresEmisor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Apellido1Emisor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Apellido2Emisor" Type="nvarchar(max)" />
+          <Property Name="DireccionEmisor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefonoEmisor" Type="int" Nullable="false" />
+          <Property Name="Cedula" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="PaisId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClienteReceptor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoReceptor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NombresReceptor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Apellido1Receptor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Apellido2Receptor" Type="nvarchar(max)" />
+          <Property Name="DireccionReceptor" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefonoReceptor" Type="int" Nullable="false" />
+          <Property Name="Cedula" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="PaisId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Envio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoEnvio" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MontoPagado" Type="float" Nullable="false" />
+          <Property Name="FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="CodigoRetiro" Type="int" Nullable="false" />
+          <Property Name="EstadoRemesaId" Type="int" Nullable="false" />
+          <Property Name="ClienteEmisorId" Type="int" Nullable="false" />
+          <Property Name="ClienteReceptorId" Type="int" Nullable="false" />
+          <Property Name="TipoDeCambioId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoRemesa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoEstadoRemesa" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Moneda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoMoneda" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notificaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoNotificacion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FechaNotificacion" Type="datetime" Nullable="false" />
+          <Property Name="EnvioId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoPais" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NombrePais" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDeCambio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoTipoCambio" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CambioDia" Type="float" Nullable="false" />
+          <Property Name="FechaTipoCambio" Type="datetime" Nullable="false" />
+          <Property Name="MonedaId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClienteEmisorEnvio">
+          <End Role="ClienteEmisor" Type="Self.ClienteEmisor" Multiplicity="1" />
+          <End Role="Envio" Type="Self.Envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteEmisor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Envio">
+              <PropertyRef Name="ClienteEmisorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteReceptorEnvio">
+          <End Role="ClienteReceptor" Type="Self.ClienteReceptor" Multiplicity="1" />
+          <End Role="Envio" Type="Self.Envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteReceptor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Envio">
+              <PropertyRef Name="ClienteReceptorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnvioNotificaciones">
+          <End Role="Envio" Type="Self.Envio" Multiplicity="1" />
+          <End Role="Notificaciones" Type="Self.Notificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Envio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notificaciones">
+              <PropertyRef Name="EnvioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadoRemesaEnvio">
+          <End Role="EstadoRemesa" Type="Self.EstadoRemesa" Multiplicity="1" />
+          <End Role="Envio" Type="Self.Envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoRemesa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Envio">
+              <PropertyRef Name="EstadoRemesaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MonedaTipoDeCambio">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+          <End Role="TipoDeCambio" Type="Self.TipoDeCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoDeCambio">
+              <PropertyRef Name="MonedaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaisClienteEmisor">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+          <End Role="ClienteEmisor" Type="Self.ClienteEmisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteEmisor">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaisClienteReceptor">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+          <End Role="ClienteReceptor" Type="Self.ClienteReceptor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteReceptor">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoDeCambioEnvio">
+          <End Role="TipoDeCambio" Type="Self.TipoDeCambio" Multiplicity="1" />
+          <End Role="Envio" Type="Self.Envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeCambio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Envio">
+              <PropertyRef Name="TipoDeCambioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_BuscarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nom" Type="varchar" Mode="In" />
+          <Parameter Name="Apellido" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_BuscarClienteReceptor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nom" Type="varchar" Mode="In" />
+          <Parameter Name="Apellido" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_BuscarMoneda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NomMoneda" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_BuscarTransaccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CodEnvio" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_CargarEmisor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NomEmi" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usp_CargarReceptor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NomRec" Type="varchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="Model1StoreContainer">
+          <EntitySet Name="ClienteEmisor" EntityType="Self.ClienteEmisor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClienteReceptor" EntityType="Self.ClienteReceptor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Envio" EntityType="Self.Envio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoRemesa" EntityType="Self.EstadoRemesa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notificaciones" EntityType="Self.Notificaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDeCambio" EntityType="Self.TipoDeCambio" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ClienteEmisorEnvio" Association="Self.FK_ClienteEmisorEnvio">
+            <End Role="ClienteEmisor" EntitySet="ClienteEmisor" />
+            <End Role="Envio" EntitySet="Envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteReceptorEnvio" Association="Self.FK_ClienteReceptorEnvio">
+            <End Role="ClienteReceptor" EntitySet="ClienteReceptor" />
+            <End Role="Envio" EntitySet="Envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnvioNotificaciones" Association="Self.FK_EnvioNotificaciones">
+            <End Role="Envio" EntitySet="Envio" />
+            <End Role="Notificaciones" EntitySet="Notificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadoRemesaEnvio" Association="Self.FK_EstadoRemesaEnvio">
+            <End Role="EstadoRemesa" EntitySet="EstadoRemesa" />
+            <End Role="Envio" EntitySet="Envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MonedaTipoDeCambio" Association="Self.FK_MonedaTipoDeCambio">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="TipoDeCambio" EntitySet="TipoDeCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaisClienteEmisor" Association="Self.FK_PaisClienteEmisor">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="ClienteEmisor" EntitySet="ClienteEmisor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaisClienteReceptor" Association="Self.FK_PaisClienteReceptor">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="ClienteReceptor" EntitySet="ClienteReceptor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoDeCambioEnvio" Association="Self.FK_TipoDeCambioEnvio">
+            <End Role="TipoDeCambio" EntitySet="TipoDeCambio" />
+            <End Role="Envio" EntitySet="Envio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EstadoRemesa" EntityType="Model1.EstadoRemesa" />
+          <EntitySet Name="Envio" EntityType="Model1.Envio" />
+          <AssociationSet Name="EstadoRemesaEnvio" Association="Model1.EstadoRemesaEnvio">
+            <End Role="EstadoRemesa" EntitySet="EstadoRemesa" />
+            <End Role="Envio" EntitySet="Envio" />
+          </AssociationSet>
+          <EntitySet Name="Notificaciones" EntityType="Model1.Notificaciones" />
+          <AssociationSet Name="EnvioNotificaciones" Association="Model1.EnvioNotificaciones">
+            <End EntitySet="Envio" Role="Envio" />
+            <End EntitySet="Notificaciones" Role="Notificaciones" />
+          </AssociationSet>
+          <EntitySet Name="ClienteEmisor" EntityType="Model1.ClienteEmisor" />
+          <EntitySet Name="ClienteReceptor" EntityType="Model1.ClienteReceptor" />
+          <EntitySet Name="Pais" EntityType="Model1.Pais" />
+          <AssociationSet Name="PaisClienteEmisor" Association="Model1.PaisClienteEmisor">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="ClienteEmisor" EntitySet="ClienteEmisor" />
+          </AssociationSet>
+          <AssociationSet Name="PaisClienteReceptor" Association="Model1.PaisClienteReceptor">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="ClienteReceptor" EntitySet="ClienteReceptor" />
+          </AssociationSet>
+          <AssociationSet Name="ClienteEmisorEnvio" Association="Model1.ClienteEmisorEnvio">
+            <End EntitySet="ClienteEmisor" Role="ClienteEmisor" />
+            <End EntitySet="Envio" Role="Envio" />
+          </AssociationSet>
+          <AssociationSet Name="ClienteReceptorEnvio" Association="Model1.ClienteReceptorEnvio">
+            <End EntitySet="ClienteReceptor" Role="ClienteReceptor" />
+            <End EntitySet="Envio" Role="Envio" />
+          </AssociationSet>
+          <EntitySet Name="TipoDeCambio" EntityType="Model1.TipoDeCambio" />
+          <EntitySet Name="Moneda" EntityType="Model1.Moneda" />
+          <AssociationSet Name="MonedaTipoDeCambio" Association="Model1.MonedaTipoDeCambio">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="TipoDeCambio" EntitySet="TipoDeCambio" />
+          </AssociationSet>
+          <AssociationSet Name="TipoDeCambioEnvio" Association="Model1.TipoDeCambioEnvio">
+            <End Role="TipoDeCambio" EntitySet="TipoDeCambio" />
+            <End Role="Envio" EntitySet="Envio" />
+          </AssociationSet>
+          <FunctionImport Name="usp_BuscarCliente2" ReturnType="Collection(Model1.usp_BuscarCliente_Result)">
+            <Parameter Name="Nom" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_BuscarClienteReceptor2" ReturnType="Collection(Model1.usp_BuscarClienteReceptor_Result)">
+            <Parameter Name="Nom" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_BuscarMoneda2" ReturnType="Collection(Model1.usp_BuscarMoneda_Result)">
+            <Parameter Name="NomMoneda" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_BuscarTransaccion2" ReturnType="Collection(Model1.usp_BuscarTransaccion_Result)">
+            <Parameter Name="CodEnvio" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CargarEmisor2" ReturnType="Collection(Model1.usp_CargarEmisor_Result)">
+            <Parameter Name="NomEmi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CargarReceptor2" ReturnType="Collection(Model1.usp_CargarReceptor_Result)">
+            <Parameter Name="NomRec" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="EstadoRemesa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="CodigoEstadoRemesa" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Envio" Relationship="Model1.EstadoRemesaEnvio" FromRole="EstadoRemesa" ToRole="Envio" />
+        </EntityType>
+        <EntityType Name="Envio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="CodigoEnvio" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="MontoPagado" Type="Double" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CodigoRetiro" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoRemesa" Relationship="Model1.EstadoRemesaEnvio" FromRole="Envio" ToRole="EstadoRemesa" />
+          <Property Name="EstadoRemesaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Notificaciones" Relationship="Model1.EnvioNotificaciones" FromRole="Envio" ToRole="Notificaciones" />
+          <NavigationProperty Name="ClienteEmisor" Relationship="Model1.ClienteEmisorEnvio" FromRole="Envio" ToRole="ClienteEmisor" />
+          <Property Name="ClienteEmisorId" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="ClienteReceptor" Relationship="Model1.ClienteReceptorEnvio" FromRole="Envio" ToRole="ClienteReceptor" />
+          <Property Name="ClienteReceptorId" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="TipoDeCambio" Relationship="Model1.TipoDeCambioEnvio" FromRole="Envio" ToRole="TipoDeCambio" />
+          <Property Name="TipoDeCambioId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="EstadoRemesaEnvio">
+          <End Type="Model1.EstadoRemesa" Role="EstadoRemesa" Multiplicity="1" />
+          <End Type="Model1.Envio" Role="Envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoRemesa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Envio">
+              <PropertyRef Name="EstadoRemesaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Notificaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoNotificacion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FechaNotificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Envio" Relationship="Model1.EnvioNotificaciones" FromRole="Notificaciones" ToRole="Envio" />
+          <Property Name="EnvioId" Nullable="false" Type="Int32" />
+        </EntityType>
+        <Association Name="EnvioNotificaciones">
+          <End Type="Model1.Envio" Multiplicity="1" Role="Envio" />
+          <End Type="Model1.Notificaciones" Multiplicity="*" Role="Notificaciones" />
+          <ReferentialConstraint>
+            <Principal Role="Envio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notificaciones">
+              <PropertyRef Name="EnvioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClienteEmisor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="CodigoEmisor" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NombresEmisor" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Apellido1Emisor" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Apellido2Emisor" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DireccionEmisor" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TelefonoEmisor" Type="Int32" Nullable="false" />
+          <Property Name="Cedula" Type="String" Nullable="false" MaxLength="16" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Pais" Relationship="Model1.PaisClienteEmisor" FromRole="ClienteEmisor" ToRole="Pais" />
+          <Property Name="PaisId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Envio" Relationship="Model1.ClienteEmisorEnvio" FromRole="ClienteEmisor" ToRole="Envio" />
+        </EntityType>
+        <EntityType Name="ClienteReceptor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="CodigoReceptor" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="NombresReceptor" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Apellido1Receptor" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Apellido2Receptor" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DireccionReceptor" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TelefonoReceptor" Type="Int32" Nullable="false" />
+          <Property Name="Cedula" Type="String" Nullable="false" MaxLength="16" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Pais" Relationship="Model1.PaisClienteReceptor" FromRole="ClienteReceptor" ToRole="Pais" />
+          <Property Name="PaisId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Envio" Relationship="Model1.ClienteReceptorEnvio" FromRole="ClienteReceptor" ToRole="Envio" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoPais" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NombrePais" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClienteEmisor" Relationship="Model1.PaisClienteEmisor" FromRole="Pais" ToRole="ClienteEmisor" />
+          <NavigationProperty Name="ClienteReceptor" Relationship="Model1.PaisClienteReceptor" FromRole="Pais" ToRole="ClienteReceptor" />
+        </EntityType>
+        <Association Name="PaisClienteEmisor">
+          <End Type="Model1.Pais" Role="Pais" Multiplicity="1" />
+          <End Type="Model1.ClienteEmisor" Role="ClienteEmisor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteEmisor">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PaisClienteReceptor">
+          <End Type="Model1.Pais" Role="Pais" Multiplicity="1" />
+          <End Type="Model1.ClienteReceptor" Role="ClienteReceptor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteReceptor">
+              <PropertyRef Name="PaisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClienteEmisorEnvio">
+          <End Type="Model1.ClienteEmisor" Multiplicity="1" Role="ClienteEmisor" />
+          <End Type="Model1.Envio" Multiplicity="*" Role="Envio" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteEmisor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Envio">
+              <PropertyRef Name="ClienteEmisorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClienteReceptorEnvio">
+          <End Type="Model1.ClienteReceptor" Multiplicity="1" Role="ClienteReceptor" />
+          <End Type="Model1.Envio" Multiplicity="*" Role="Envio" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteReceptor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Envio">
+              <PropertyRef Name="ClienteReceptorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoDeCambio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoTipoCambio" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CambioDia" Type="Double" Nullable="false" />
+          <Property Name="FechaTipoCambio" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Moneda" Relationship="Model1.MonedaTipoDeCambio" FromRole="TipoDeCambio" ToRole="Moneda" />
+          <Property Name="MonedaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Envio" Relationship="Model1.TipoDeCambioEnvio" FromRole="TipoDeCambio" ToRole="Envio" />
+        </EntityType>
+        <EntityType Name="Moneda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoMoneda" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TipoDeCambio" Relationship="Model1.MonedaTipoDeCambio" FromRole="Moneda" ToRole="TipoDeCambio" />
+        </EntityType>
+        <Association Name="MonedaTipoDeCambio">
+          <End Type="Model1.Moneda" Role="Moneda" Multiplicity="1" />
+          <End Type="Model1.TipoDeCambio" Role="TipoDeCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoDeCambio">
+              <PropertyRef Name="MonedaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TipoDeCambioEnvio">
+          <End Type="Model1.TipoDeCambio" Role="TipoDeCambio" Multiplicity="1" />
+          <End Type="Model1.Envio" Role="Envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeCambio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Envio">
+              <PropertyRef Name="TipoDeCambioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="usp_BuscarCliente_Result">
+          <Property Type="String" Name="CodigoEmisor" Nullable="false" />
+          <Property Type="String" Name="NombresEmisor" Nullable="false" />
+          <Property Type="String" Name="Apellido1Emisor" Nullable="false" />
+          <Property Type="String" Name="Apellido2Emisor" Nullable="true" />
+          <Property Type="String" Name="DireccionEmisor" Nullable="false" />
+          <Property Type="Int32" Name="TelefonoEmisor" Nullable="false" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="NombrePais" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_BuscarClienteReceptor_Result">
+          <Property Type="String" Name="CodigoReceptor" Nullable="false" />
+          <Property Type="String" Name="NombresReceptor" Nullable="false" />
+          <Property Type="String" Name="Apellido1Receptor" Nullable="false" />
+          <Property Type="String" Name="Apellido2Receptor" Nullable="true" />
+          <Property Type="String" Name="DireccionReceptor" Nullable="false" />
+          <Property Type="Int32" Name="TelefonoReceptor" Nullable="false" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="NombrePais" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_BuscarMoneda_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="TipoMoneda" Nullable="false" />
+          <Property Type="Double" Name="CambioDia" Nullable="false" />
+          <Property Type="DateTime" Name="FechaTipoCambio" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_BuscarTransaccion_Result">
+          <Property Type="String" Name="CodigoEnvio" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPago" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="MontoPagado" Nullable="false" />
+          <Property Type="String" Name="Estado" Nullable="false" />
+          <Property Type="Double" Name="CambioDia" Nullable="false" />
+          <Property Type="String" Name="TipoMoneda" Nullable="false" />
+          <Property Type="String" Name="CodigoEmisor" Nullable="false" />
+          <Property Type="String" Name="NombresEmisor" Nullable="false" />
+          <Property Type="String" Name="Apellido1Emisor" Nullable="false" />
+          <Property Type="String" Name="CodigoReceptor" Nullable="false" />
+          <Property Type="String" Name="NombresReceptor" Nullable="false" />
+          <Property Type="String" Name="Apellido1Receptor" Nullable="false" />
+          <Property Type="String" Name="PaisDestino" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_CargarEmisor_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="Apellido" Nullable="false" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="16" />
+        </ComplexType>
+        <ComplexType Name="usp_CargarReceptor_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="Apellido" Nullable="false" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="16" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="EstadoRemesa">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.EstadoRemesa)">
+        <MappingFragment StoreEntitySet="EstadoRemesa">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodigoEstadoRemesa" ColumnName="CodigoEstadoRemesa" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Envio">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Envio)">
+        <MappingFragment StoreEntitySet="Envio">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodigoEnvio" ColumnName="CodigoEnvio" />
+          <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />
+          <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+          <ScalarProperty Name="CodigoRetiro" ColumnName="CodigoRetiro" />
+          <ScalarProperty Name="EstadoRemesaId" ColumnName="EstadoRemesaId" />
+          <ScalarProperty Name="ClienteEmisorId" ColumnName="ClienteEmisorId" />
+          <ScalarProperty Name="ClienteReceptorId" ColumnName="ClienteReceptorId" />
+          <ScalarProperty Name="TipoDeCambioId" ColumnName="TipoDeCambioId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notificaciones">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Notificaciones)">
+        <MappingFragment StoreEntitySet="Notificaciones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodigoNotificacion" ColumnName="CodigoNotificacion" />
+          <ScalarProperty Name="FechaNotificacion" ColumnName="FechaNotificacion" />
+          <ScalarProperty Name="EnvioId" ColumnName="EnvioId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClienteEmisor">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ClienteEmisor)">
+        <MappingFragment StoreEntitySet="ClienteEmisor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodigoEmisor" ColumnName="CodigoEmisor" />
+          <ScalarProperty Name="NombresEmisor" ColumnName="NombresEmisor" />
+          <ScalarProperty Name="Apellido1Emisor" ColumnName="Apellido1Emisor" />
+          <ScalarProperty Name="Apellido2Emisor" ColumnName="Apellido2Emisor" />
+          <ScalarProperty Name="DireccionEmisor" ColumnName="DireccionEmisor" />
+          <ScalarProperty Name="TelefonoEmisor" ColumnName="TelefonoEmisor" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClienteReceptor">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.ClienteReceptor)">
+        <MappingFragment StoreEntitySet="ClienteReceptor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodigoReceptor" ColumnName="CodigoReceptor" />
+          <ScalarProperty Name="NombresReceptor" ColumnName="NombresReceptor" />
+          <ScalarProperty Name="Apellido1Receptor" ColumnName="Apellido1Receptor" />
+          <ScalarProperty Name="Apellido2Receptor" ColumnName="Apellido2Receptor" />
+          <ScalarProperty Name="DireccionReceptor" ColumnName="DireccionReceptor" />
+          <ScalarProperty Name="TelefonoReceptor" ColumnName="TelefonoReceptor" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pais">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Pais)">
+        <MappingFragment StoreEntitySet="Pais">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodigoPais" ColumnName="CodigoPais" />
+          <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDeCambio">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.TipoDeCambio)">
+        <MappingFragment StoreEntitySet="TipoDeCambio">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CodigoTipoCambio" ColumnName="CodigoTipoCambio" />
+          <ScalarProperty Name="CambioDia" ColumnName="CambioDia" />
+          <ScalarProperty Name="FechaTipoCambio" ColumnName="FechaTipoCambio" />
+          <ScalarProperty Name="MonedaId" ColumnName="MonedaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Moneda">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Moneda)">
+        <MappingFragment StoreEntitySet="Moneda">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TipoMoneda" ColumnName="TipoMoneda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_BuscarCliente2" FunctionName="Model1.Store.usp_BuscarCliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model1.usp_BuscarCliente_Result">
+                <ScalarProperty Name="CodigoEmisor" ColumnName="CodigoEmisor" />
+                <ScalarProperty Name="NombresEmisor" ColumnName="NombresEmisor" />
+                <ScalarProperty Name="Apellido1Emisor" ColumnName="Apellido1Emisor" />
+                <ScalarProperty Name="Apellido2Emisor" ColumnName="Apellido2Emisor" />
+                <ScalarProperty Name="DireccionEmisor" ColumnName="DireccionEmisor" />
+                <ScalarProperty Name="TelefonoEmisor" ColumnName="TelefonoEmisor" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_BuscarClienteReceptor2" FunctionName="Model1.Store.usp_BuscarClienteReceptor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model1.usp_BuscarClienteReceptor_Result">
+                <ScalarProperty Name="CodigoReceptor" ColumnName="CodigoReceptor" />
+                <ScalarProperty Name="NombresReceptor" ColumnName="NombresReceptor" />
+                <ScalarProperty Name="Apellido1Receptor" ColumnName="Apellido1Receptor" />
+                <ScalarProperty Name="Apellido2Receptor" ColumnName="Apellido2Receptor" />
+                <ScalarProperty Name="DireccionReceptor" ColumnName="DireccionReceptor" />
+                <ScalarProperty Name="TelefonoReceptor" ColumnName="TelefonoReceptor" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_BuscarMoneda2" FunctionName="Model1.Store.usp_BuscarMoneda">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model1.usp_BuscarMoneda_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TipoMoneda" ColumnName="TipoMoneda" />
+                <ScalarProperty Name="CambioDia" ColumnName="CambioDia" />
+                <ScalarProperty Name="FechaTipoCambio" ColumnName="FechaTipoCambio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_BuscarTransaccion2" FunctionName="Model1.Store.usp_BuscarTransaccion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model1.usp_BuscarTransaccion_Result">
+                <ScalarProperty Name="CodigoEnvio" ColumnName="CodigoEnvio" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CambioDia" ColumnName="CambioDia" />
+                <ScalarProperty Name="TipoMoneda" ColumnName="TipoMoneda" />
+                <ScalarProperty Name="CodigoEmisor" ColumnName="CodigoEmisor" />
+                <ScalarProperty Name="NombresEmisor" ColumnName="NombresEmisor" />
+                <ScalarProperty Name="Apellido1Emisor" ColumnName="Apellido1Emisor" />
+                <ScalarProperty Name="CodigoReceptor" ColumnName="CodigoReceptor" />
+                <ScalarProperty Name="NombresReceptor" ColumnName="NombresReceptor" />
+                <ScalarProperty Name="Apellido1Receptor" ColumnName="Apellido1Receptor" />
+                <ScalarProperty Name="PaisDestino" ColumnName="PaisDestino" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_CargarEmisor2" FunctionName="Model1.Store.usp_CargarEmisor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model1.usp_CargarEmisor_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_CargarReceptor2" FunctionName="Model1.Store.usp_CargarReceptor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model1.usp_CargarReceptor_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

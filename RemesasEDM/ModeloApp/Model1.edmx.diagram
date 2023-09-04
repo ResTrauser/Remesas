@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b01aa3e9846547e4b8b779f50c95702b" Name="Diagram1" ZoomLevel="93" >
+        <EntityTypeShape EntityType="Model1.EstadoRemesa" Width="1.5" PointX="2.25" PointY="1.625" />
+        <EntityTypeShape EntityType="Model1.Envio" Width="1.5" PointX="4.5" PointY="1.5" />
+        <AssociationConnector Association="Model1.EstadoRemesaEnvio" />
+        <EntityTypeShape EntityType="Model1.Notificaciones" Width="1.5" PointX="2.5" PointY="4.375" />
+        <AssociationConnector Association="Model1.EnvioNotificaciones" />
+        <EntityTypeShape EntityType="Model1.ClienteEmisor" Width="1.5" PointX="7" PointY="0.875" />
+        <EntityTypeShape EntityType="Model1.ClienteReceptor" Width="1.5" PointX="7" PointY="4.25" />
+        <EntityTypeShape EntityType="Model1.Pais" Width="1.5" PointX="10.125" PointY="3.625" />
+        <AssociationConnector Association="Model1.PaisClienteEmisor" />
+        <AssociationConnector Association="Model1.PaisClienteReceptor" />
+        <AssociationConnector Association="Model1.ClienteEmisorEnvio" />
+        <AssociationConnector Association="Model1.ClienteReceptorEnvio" />
+        <EntityTypeShape EntityType="Model1.TipoDeCambio" Width="1.5" PointX="4.625" PointY="6.625" />
+        <EntityTypeShape EntityType="Model1.Moneda" Width="1.5" PointX="2.375" PointY="7.125" />
+        <AssociationConnector Association="Model1.MonedaTipoDeCambio" />
+        <AssociationConnector Association="Model1.TipoDeCambioEnvio" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
